@@ -58,7 +58,7 @@ console.log(ab.name);
 
 function f() {
   console.log(h); //undefined : var declared and initialised with undefined due to hoisting
-  console.log(g); // not available -  let declare but not initialised : temporal deadzone
+  //   console.log(g); // not available -  let declare but not initialised : temporal deadzone
   var h = 100;
   let g = 10;
   console.log(g);
@@ -66,3 +66,35 @@ function f() {
 }
 
 let data = f();
+
+function sum(num1, num2, fnToCall) {
+  //unlike ts , java data type not given in js fn parameter
+  let res = num1 + num2;
+  fnToCall(res); //this will hv closure of sum and pass res as param
+}
+
+function displayResult(data) {
+  console.log("result of sum is " + data);
+}
+
+function displayResultPassive(data) {
+  console.log("sum is result is  " + data);
+}
+
+// sum(1, 2, displayResult);
+// sum(1, 2, displayResultPassive);
+
+function calculateArithmetic(a, b, arithmeticFinalFunction) {
+  const ans = arithmeticFinalFunction(a, b);
+  return ans;
+}
+
+function sum(a, b) {
+  return a + b;
+}
+const value = calculateArithmetic(1, 2, sum);
+console.log(value);
+
+setTimeout(() => {
+  sum(1, 2, displayResult);
+}, timeout);
